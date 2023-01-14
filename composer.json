@@ -1,0 +1,36 @@
+{
+    "name": "slowlyo/slow-login-guard",
+    "alias": "登录保护",
+    "description": "为SlowAdmin增加登录保护功能",
+    "type": "library",
+    "version": "1.0.0",
+    "keywords": [
+        "slow-admin",
+        "extension"
+    ],
+    "homepage": "https://gitee.com/slowlyo/slow-login-guard",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "slowlyo",
+            "email": "slowlyo_email@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "slowlyo/slow-admin": "~1.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Slowlyo\\SlowLoginGuard\\": "src/"
+        }
+    },
+    "extra": {
+        "slow-admin": "Slowlyo\\SlowLoginGuard\\SlowLoginGuardServiceProvider",
+        "laravel": {
+            "providers": [
+                "Slowlyo\\SlowLoginGuard\\SlowLoginGuardServiceProvider"
+            ]
+        }
+    }
+}
