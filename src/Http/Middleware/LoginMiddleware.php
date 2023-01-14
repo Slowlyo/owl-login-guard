@@ -8,9 +8,11 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Slowlyo\SlowAdmin\Admin;
 use Slowlyo\SlowAdmin\Traits\ErrorTrait;
+use Psr\Container\NotFoundExceptionInterface;
+use Psr\Container\ContainerExceptionInterface;
 use Slowlyo\SlowLoginGuard\SlowLoginGuardServiceProvider;
 
-class LoginBeforeMiddleware
+class LoginMiddleware
 {
     use ErrorTrait;
 
@@ -19,8 +21,8 @@ class LoginBeforeMiddleware
      * @param Closure $next
      *
      * @return \Illuminate\Http\JsonResponse|mixed
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public function handle(Request $request, Closure $next)
     {
@@ -32,15 +34,52 @@ class LoginBeforeMiddleware
             }
         }
 
-        return $next($request);
+        $response = $next($request);
+
+        if ($request->is(config('admin.route.prefix') . '/login') && $request->has(['username', 'password'])) {
+            if ($response instanceof \Illuminate\Http\JsonResponse && $response->getData()->msg == __('admin.login_failed')) {
+                $this->record($request->input('username'), $response->getData()->status == 0);
+            }
+        }
+
+        return $response;
+    }
+
+    /**
+     * @param $username
+     * @param bool $forget
+     *
+     * @return void
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    private function record($username, bool $forget = false)
+    {
+        if ($forget) {
+            app('cache')->forget($this->getCacheKey($username));
+            return;
+        }
+
+        $record = app('cache')->get($this->getCacheKey($username));
+
+        $value = [
+            'tryCount'    => 1,
+            'lastTryTime' => time(),
+        ];
+
+        if ($record) {
+            $value['tryCount'] = Arr::get($record, 'tryCount', 0) + 1;
+        }
+
+        app('cache')->put($this->getCacheKey($username), $value);
     }
 
     /**
      * @param $username
      *
      * @return void
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     private function check($username)
     {

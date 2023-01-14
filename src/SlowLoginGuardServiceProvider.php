@@ -5,18 +5,12 @@ namespace Slowlyo\SlowLoginGuard;
 use Slowlyo\SlowAdmin\Renderers\TextControl;
 use Slowlyo\SlowAdmin\Extend\ServiceProvider;
 use Slowlyo\SlowAdmin\Renderers\NumberControl;
-use Slowlyo\SlowLoginGuard\Http\Middleware\LoginAfterMiddleware;
-use Slowlyo\SlowLoginGuard\Http\Middleware\LoginBeforeMiddleware;
+use Slowlyo\SlowLoginGuard\Http\Middleware\LoginMiddleware;
 
 class SlowLoginGuardServiceProvider extends ServiceProvider
 {
     protected $middleware = [
-        'before' => [
-            LoginBeforeMiddleware::class,
-        ],
-        'after'  => [
-            LoginAfterMiddleware::class,
-        ],
+        LoginMiddleware::class,
     ];
 
     public function register()
