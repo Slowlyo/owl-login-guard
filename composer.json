@@ -3,7 +3,6 @@
     "alias": "登录保护",
     "description": "为SlowAdmin增加登录保护功能",
     "type": "library",
-    "version": "1.0.0",
     "keywords": [
         "slow-admin",
         "extension"
