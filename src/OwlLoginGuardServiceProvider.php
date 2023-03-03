@@ -1,13 +1,13 @@
 <?php
 
-namespace Slowlyo\SlowLoginGuard;
+namespace Slowlyo\OwlLoginGuard;
 
-use Slowlyo\SlowAdmin\Renderers\TextControl;
-use Slowlyo\SlowAdmin\Extend\ServiceProvider;
-use Slowlyo\SlowAdmin\Renderers\NumberControl;
-use Slowlyo\SlowLoginGuard\Http\Middleware\LoginMiddleware;
+use Slowlyo\OwlAdmin\Renderers\TextControl;
+use Slowlyo\OwlAdmin\Extend\ServiceProvider;
+use Slowlyo\OwlAdmin\Renderers\NumberControl;
+use Slowlyo\OwlLoginGuard\Http\Middleware\LoginMiddleware;
 
-class SlowLoginGuardServiceProvider extends ServiceProvider
+class OwlLoginGuardServiceProvider extends ServiceProvider
 {
     protected $middleware = [
         LoginMiddleware::class,

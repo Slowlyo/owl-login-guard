@@ -1,4 +1,4 @@
-## SlowAdmin 登录保护
+## OwlAdmin 登录保护
 
 ## 效果
 
@@ -8,12 +8,12 @@
 
 #### zip 下载地址
 
-[https://gitee.com/slowlyo/slow-login-guard/repository/archive/master.zip](https://gitee.com/slowlyo/slow-login-guard/repository/archive/master.zip)
+[https://gitee.com/slowlyo/owl-login-guard/repository/archive/master.zip](https://gitee.com/slowlyo/owl-login-guard/repository/archive/master.zip)
 
 #### composer
 
 ```bash
-composer require slowlyo/slow-login-guard
+composer require slowlyo/owl-login-guard
 ```
 
 ## 使用说明

@@ -1,16 +1,16 @@
 <?php
 
-namespace Slowlyo\SlowLoginGuard\Http\Middleware;
+namespace Slowlyo\OwlLoginGuard\Http\Middleware;
 
-use Arr;
 use Closure;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
-use Slowlyo\SlowAdmin\Admin;
-use Slowlyo\SlowAdmin\Traits\ErrorTrait;
+use Slowlyo\OwlAdmin\Admin;
+use Slowlyo\OwlAdmin\Traits\ErrorTrait;
 use Psr\Container\NotFoundExceptionInterface;
 use Psr\Container\ContainerExceptionInterface;
-use Slowlyo\SlowLoginGuard\SlowLoginGuardServiceProvider;
+use Slowlyo\OwlLoginGuard\OwlLoginGuardServiceProvider;
 
 class LoginMiddleware
 {
@@ -103,16 +103,16 @@ class LoginMiddleware
 
     private function getCacheKey($username)
     {
-        return SlowLoginGuardServiceProvider::loginRestrictionCacheKey($username);
+        return OwlLoginGuardServiceProvider::loginRestrictionCacheKey($username);
     }
 
     private function config($key, $default = null)
     {
-        return SlowLoginGuardServiceProvider::setting($key, $default);
+        return OwlLoginGuardServiceProvider::setting($key, $default);
     }
 
     private function trans($key, $replace = [])
     {
-        return SlowLoginGuardServiceProvider::trans($key, $replace);
+        return OwlLoginGuardServiceProvider::trans($key, $replace);
     }
 }
