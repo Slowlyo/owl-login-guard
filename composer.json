@@ -1,7 +1,7 @@
 {
-    "name": "slowlyo/slow-login-guard",
+    "name": "slowlyo/owl-login-guard",
     "alias": "登录保护",
-    "description": "为OwlAdmin增加登录保护功能",
+    "description": "OwlAdmin扩展: 增加登录保护功能",
     "type": "library",
     "keywords": [
         "owl-admin",
