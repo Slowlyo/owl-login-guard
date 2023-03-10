@@ -13,19 +13,6 @@ class OwlLoginGuardServiceProvider extends ServiceProvider
         LoginMiddleware::class,
     ];
 
-    public function register()
-    {
-        //
-    }
-
-    public function init()
-    {
-        parent::init();
-
-        //
-
-    }
-
     public function settingForm()
     {
         return $this->baseSettingForm()->data([
